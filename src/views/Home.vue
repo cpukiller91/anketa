@@ -138,9 +138,18 @@
             <b-list-group-item variant="light">
               <h4 class="mt-3">Укажите количество детей с инвалидностью для обучения в классах:</h4>
               <b-row>
-                <b-col><b-form-input size="sm" placeholder="В классах начальной ступени (1-4 кл.)"></b-form-input></b-col>
-                <b-col><b-form-input size="sm" placeholder="В классах средней ступени (5-9 кл.)"></b-form-input></b-col>
-                <b-col><b-form-input size="sm" placeholder="В классах старшей ступени (10-11 кл.)"></b-form-input></b-col>
+                <b-col>
+                  <label for="20">В классах начальной ступени (1-4 кл.)</label>
+                  <b-form-input type="number" id="20" placeholder=""></b-form-input>
+                </b-col>
+                <b-col>
+                  <label for="21">В классах средней ступени (5-9 кл.)</label>
+                  <b-form-input type="number" id="21" placeholder=""></b-form-input>
+                </b-col>
+                <b-col>
+                  <label for="22">В классах старшей ступени (10-11 кл.)</label>
+                  <b-form-input type="number" id="22" placeholder=""></b-form-input>
+                </b-col>
               </b-row>
             </b-list-group-item>
 
@@ -148,7 +157,12 @@
               <h4 class="mt-3">Какие формы получения образования имеются в учреждении?</h4>
               <b-row>
                 <b-col>
-                  <b-form-select id="type" :options="level1"></b-form-select>
+                  <b-form-select id="type" v-model="form1" :options="level1"></b-form-select>
+                </b-col>
+              </b-row>
+              <b-row class="mt-3" v-if="form1 === 'a'">
+                <b-col>
+                  <b-form-textarea></b-form-textarea>
                 </b-col>
               </b-row>
             </b-list-group-item>
@@ -184,7 +198,12 @@
               <h4 class="mt-3">Как Вы сами оцениваете уровень профессиональной подготовки перечисленных специалистов в Вашем учреждении?</h4>
               <b-row>
                 <b-col>
-                  <b-form-select id="type" :options="level5"></b-form-select>
+                  <b-form-select id="type" v-model="form2" :options="level5"></b-form-select>
+                </b-col>
+              </b-row>
+              <b-row class="mt-3" v-if="form2 === 'b'">
+                <b-col>
+                  <b-form-textarea></b-form-textarea>
                 </b-col>
               </b-row>
             </b-list-group-item>
@@ -432,9 +451,11 @@ export default {
           text: 'Обучение на базе образовательной организации'
         },
         {
+          value: 'a',
           text: 'Другое (укажите)'
         }
       ],
+      form1: '',
       level2: [
         {
           text: 'Да'
@@ -511,9 +532,11 @@ export default {
           text: 'Тьютор'
         },
         {
+          value: 'b',
           text: 'Другое (укажите)'
         }
       ],
+      form2: '',
       level5: [
         {
           text: 'Неудовлетворительно'
