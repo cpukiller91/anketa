@@ -344,22 +344,7 @@
                 </b-col>
               </b-row>
             </b-list-group-item>
-            <b-list-group-item variant="light">
-              <h4 class="mt-3">
-                Актуальные проблемы деятельности учреждения
-              </h4>
-              <b-row>
-                <b-col>
-                  <b-form-textarea
-                      id="textarea"
-                      v-model="form.description"
-                      placeholder="Можете здесь написать..."
-                      rows="3"
-                      max-rows="6"
-                  ></b-form-textarea>
-                </b-col>
-              </b-row>
-            </b-list-group-item>
+
           </b-list-group>
           <div>
             <br/>
@@ -494,21 +479,21 @@
                           <h4 class="mt-3">7.Укажите наличие в учреждении нормативно-правового обеспечения организации получения образования детьми- инвалидами:</h4>
                           <b-row>
                             <b-col>
-                              <label v-if="item.PDF3" for="9"><b-link target="_blank" :href="'http://localhost:1337'+item.PDF3.url">Разделы в Уставе учреждения об обучении и воспитании детей с инвалидностью</b-link></label>
+                              <label v-if="item.PDF3" for="9"><b-link target="_blank" :href="'http://92.53.104.150:1337'+item.PDF3.url">Разделы в Уставе учреждения об обучении и воспитании детей с инвалидностью</b-link></label>
 
                             </b-col>
                             <b-col>
-                              <label v-if="item.PDF4" for="10"><b-link target="_blank" :href="'http://localhost:1337'+item.PDF4.url">Локальные акты по работе с детьми- инвалидами (Положение об итоговой аттестации и др.)</b-link></label>
+                              <label v-if="item.PDF4" for="10"><b-link target="_blank" :href="'http://92.53.104.150:1337'+item.PDF4.url">Локальные акты по работе с детьми- инвалидами (Положение об итоговой аттестации и др.)</b-link></label>
 
                             </b-col>
                           </b-row>
                           <b-row align-v="baseline" class="mt-3">
                             <b-col>
-                              <label v-if="item.PDF5" for="11"><b-link target="_blank" :href="'http://localhost:1337'+item.PDF5.url">Разделы о создании специальных образовательных условий для детей с инвалидностью в Программе развития организации</b-link></label>
+                              <label v-if="item.PDF5" for="11"><b-link target="_blank" :href="'http://92.53.104.150:1337'+item.PDF5.url">Разделы о создании специальных образовательных условий для детей с инвалидностью в Программе развития организации</b-link></label>
 
                             </b-col>
                             <b-col>
-                              <label v-if="item.PDF6" for="12"><b-link target="_blank" :href="'http://localhost:1337'+item.PDF6.url">Другое</b-link></label>
+                              <label v-if="item.PDF6" for="12"><b-link target="_blank" :href="'http://92.53.104.150:1337'+item.PDF6.url">Другое</b-link></label>
 
                             </b-col>
                           </b-row>
@@ -845,18 +830,18 @@ export default {
       summ:{},
       isSend: true,
       form:{
-        name: '',
-        site: '',
-        phone: '',
-        email:'',
-        type:'',
+        name: null,
+        site: null,
+        phone: null,
+        email:null,
+        type:null,
         PDF1:null,
         PDF2:null,
         PDF3:null,
         PDF4:null,
         PDF5:null,
         PDF6:null,
-        year: '',
+        year: null,
         kidcount: null,
         zreniya:null,
         slukha:null,
@@ -876,26 +861,26 @@ export default {
         stupeni59:null,
         stupeni1011:null,
 
-        fio:"",
-        doljnost:"",
-        mailcontact:"",
-        description:"",
-        level1: '',
-        level2: "",
-        level3: '',
-        level4: "",
-        level5: "",
-        level6: "",
-        level7: "",
-        level8: "",
-        level9: "",
-        level77: "",
-        level107: "",
-        level97: "",
-        level87: '',
-        level193: "",
-        level201: "",
-        level202: ""
+        fio:null,
+        doljnost:null,
+        mailcontact:null,
+        description:null,
+        level1: null,
+        level2: null,
+        level3: null,
+        level4: null,
+        level5: null,
+        level6: null,
+        level7: null,
+        level8: null,
+        level9: null,
+        level77: null,
+        level107: null,
+        level97: null,
+        level87: null,
+        level193: null,
+        level201: null,
+        level202: null
 
       },
 
@@ -1402,12 +1387,31 @@ export default {
 
       formData.append('data', JSON.stringify(this.form));
 
-
+      // this.form.forEach((element) => {
+      //   //if(element)
+      //   console.log(element);
+      // })
       //const params = new url.URLSearchParams(this.form);
-      console.log(this.form);
+      //console.log(this.form);
+      var filter = {}
+      var sEl = [];
+      for (var key in this.form) {
+        // этот код будет вызван для каждого свойства объекта
+        // ..и выведет имя свойства и его значение
+        if(this.form[key]!= null){
+          filter[key] = this.form[key];
+
+          //console.log( "Ключ: " + key + " значение: " + this.form[key] );
+
+        }
+
+      }
+
+
+
       //formData.append('name', this.form.name);
       //this.$refs.file.files[0];
-      axios.get('http://localhost:1337/summ', this.form)
+      axios.get('http://92.53.104.150:1337/summ',  {params:filter})
           .then((res) => {
 
             this.summ = res.data.suma;
@@ -1420,7 +1424,7 @@ export default {
         //Perform action in always
       });
 
-      axios.get('http://localhost:1337/summ', this.form)
+      axios.get('http://92.53.104.150:1337/summ', {params:filter})
           .then((res) => {
 
             this.items = res.data.item;
