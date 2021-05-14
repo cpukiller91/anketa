@@ -1,0 +1,207 @@
+{
+  "kind": "collectionType",
+  "collectionName": "anketas",
+  "info": {
+    "name": "anketa",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": false,
+      "required": true
+    },
+    "site": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "PDF1": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "PDF2": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "year": {
+      "type": "date"
+    },
+    "kidcount": {
+      "type": "integer"
+    },
+    "PDF4": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "PDF5": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "PDF6": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "zreniya": {
+      "type": "integer"
+    },
+    "slukha": {
+      "type": "integer"
+    },
+    "intellekta": {
+      "type": "integer"
+    },
+    "rechi": {
+      "type": "integer"
+    },
+    "cerebral": {
+      "type": "integer"
+    },
+    "ras": {
+      "type": "integer"
+    },
+    "somaticheski": {
+      "type": "integer"
+    },
+    "inoje": {
+      "type": "integer"
+    },
+    "stupeni14": {
+      "type": "integer"
+    },
+    "stupeni59": {
+      "type": "integer"
+    },
+    "stupeni1011": {
+      "type": "integer"
+    },
+    "level1": {
+      "type": "string"
+    },
+    "level2": {
+      "type": "string"
+    },
+    "level3": {
+      "type": "string"
+    },
+    "level4": {
+      "type": "string"
+    },
+    "level5": {
+      "type": "string"
+    },
+    "level6": {
+      "type": "string"
+    },
+    "level7": {
+      "type": "string"
+    },
+    "level8": {
+      "type": "string"
+    },
+    "level9": {
+      "type": "string"
+    },
+    "level77": {
+      "type": "string"
+    },
+    "level87": {
+      "type": "string"
+    },
+    "level97": {
+      "type": "string"
+    },
+    "level107": {
+      "type": "string"
+    },
+    "fio": {
+      "type": "string"
+    },
+    "doljnost": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "mailcontact": {
+      "type": "email"
+    },
+    "vorganizatsii": {
+      "type": "integer"
+    },
+    "dogovor": {
+      "type": "integer"
+    },
+    "medrab": {
+      "type": "integer"
+    },
+    "zdravohran": {
+      "type": "integer"
+    },
+    "skillup": {
+      "type": "integer"
+    },
+    "level193": {
+      "type": "string"
+    },
+    "level201": {
+      "type": "string"
+    },
+    "level202": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}

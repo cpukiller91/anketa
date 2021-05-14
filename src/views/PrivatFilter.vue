@@ -44,38 +44,6 @@
               </b-row>
             </b-list-group-item>
 
-            <b-list-group-item variant="light">
-              <h4 class="mt-3">Лицензия:</h4>
-              <b-row>
-                <b-col>
-                  <label for="5">на осуществление медицинской деятельности</label>
-                  <b-form-file
-                      id="5"
-                      accept=".pdf"
-                      :state="Boolean(form.PDF1)"
-                      drop-placeholder="Drop file here..."
-                      ref="PDF1"
-                      v-model="form.PDF1"
-                      v-on:change="handleFileUpload()"
-                      placeholder="Ссылка/ текст документа (pdf*)"
-                      browse-text="Загрузить">
-
-                  </b-form-file>
-                </b-col>
-                <b-col>
-                  <label for="6">на осуществление образовательной деятельности</label>
-                  <b-form-file
-                      id="6"
-                      accept=".pdf"
-                      :state="Boolean(form.PDF2)"
-                      drop-placeholder="Drop file here..."
-                      ref="PDF2"
-                      v-model="form.PDF2"
-                      v-on:change="handleFileUpload()"
-                      placeholder="Ссылка/ текст документа (pdf*)" browse-text="Загрузить"></b-form-file>
-                </b-col>
-              </b-row>
-            </b-list-group-item>
 
             <b-list-group-item variant="light">
               <b-row align-v="baseline" class="mt-3">
@@ -86,64 +54,6 @@
                 <b-col>
                   <label for="8">Общая численность детей с инвалидностью в текущем году</label>
                   <b-form-input id="8" v-model="form.kidcount"  type="number" placeholder=""></b-form-input>
-                </b-col>
-              </b-row>
-            </b-list-group-item>
-
-            <b-list-group-item variant="light">
-              <h4 class="mt-3">7.Укажите наличие в учреждении нормативно-правового обеспечения организации получения образования детьми- инвалидами:</h4>
-              <b-row>
-                <b-col>
-                  <label for="9">Разделы в Уставе учреждения об обучении и воспитании детей с инвалидностью</label>
-                  <b-form-file
-                      id="9"
-                      accept=".pdf"
-                      :state="Boolean(form.PDF3)"
-                      drop-placeholder="Drop file here..."
-                      ref="PDF3"
-                      v-model="form.PDF3"
-                      v-on:change="handleFileUpload()"
-                      placeholder="Ссылка/ текст документа (pdf*)"
-                      browse-text="Загрузить"></b-form-file>
-                </b-col>
-                <b-col>
-                  <label for="10">Локальные акты по работе с детьми- инвалидами (Положение об итоговой аттестации и др.)</label>
-                  <b-form-file
-                      id="10"
-                      accept=".pdf"
-                      :state="Boolean(form.PDF4)"
-                      drop-placeholder="Drop file here..."
-                      ref="PDF4"
-                      v-model="form.PDF4"
-                      v-on:change="handleFileUpload()"
-                      placeholder="Ссылка/ текст документа (pdf*)"
-                      browse-text="Загрузить"></b-form-file>
-                </b-col>
-              </b-row>
-              <b-row align-v="baseline" class="mt-3">
-                <b-col>
-                  <label for="11">Разделы о создании специальных образовательных условий для детей с инвалидностью в Программе развития организации</label>
-                  <b-form-file
-                      id="11"
-                      accept=".pdf"
-                      :state="Boolean(form.PDF5)"
-                      drop-placeholder="Drop file here..."
-                      ref="PDF5"
-                      v-model="form.PDF5"
-                      v-on:change="handleFileUpload()"
-                      placeholder="Ссылка/ текст документа (pdf*)" browse-text="Загрузить"></b-form-file>
-                </b-col>
-                <b-col>
-                  <label for="12">Другое</label>
-                  <b-form-file
-                      id="12"
-                      accept=".pdf"
-                      :state="Boolean(form.PDF6)"
-                      drop-placeholder="Drop file here..."
-                      ref="PDF6"
-                      v-model="form.PDF6"
-                      v-on:change="handleFileUpload()"
-                      placeholder="Ссылка/ текст документа (pdf*)" browse-text="Загрузить"></b-form-file>
                 </b-col>
               </b-row>
             </b-list-group-item>
@@ -211,6 +121,11 @@
               <b-row>
                 <b-col>
                   <b-form-select id="type" v-model="form.level1" :options="level1"></b-form-select>
+                </b-col>
+              </b-row>
+              <b-row class="mt-3" v-if="form1 === 'a'">
+                <b-col>
+                  <b-form-textarea></b-form-textarea>
                 </b-col>
               </b-row>
             </b-list-group-item>
@@ -436,19 +351,472 @@
               <b-row>
                 <b-col>
                   <b-form-textarea
-                    id="textarea"
-                    v-model="form.description"
-                    placeholder="Можете здесь написать..."
-                    rows="3"
-                    max-rows="6"
+                      id="textarea"
+                      v-model="form.description"
+                      placeholder="Можете здесь написать..."
+                      rows="3"
+                      max-rows="6"
                   ></b-form-textarea>
                 </b-col>
               </b-row>
             </b-list-group-item>
           </b-list-group>
           <div>
+            <br/>
+            <b-button type="submit" variant="success">Сделать выборку</b-button>
+            <br/>
+            <b-container class="bv-example-row">
+              <b-row>
+                <b-col cols="4"> <template>
+                  <div>
+                    <b-list-group style="max-width: 300px;">
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">Нарушением зрения</span>
+                        <b-badge>{{summ.zreniya}}</b-badge>
+                      </b-list-group-item>
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">Нарушением слуха</span>
+                        <b-badge>{{summ.slukha}}</b-badge>
+                      </b-list-group-item>
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">Нарушением интеллекта</span>
+                        <b-badge>{{summ.intellekta}}</b-badge>
+                      </b-list-group-item>
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">Нарушением речи</span>
+                        <b-badge>{{summ.rechi}}</b-badge>
+                      </b-list-group-item>
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">Двигательными нарушениями (в том числе ДЦП)</span>
+                        <b-badge>{{summ.cerebral}}</b-badge>
+                      </b-list-group-item>
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">Расстройством эмоционально-волевой сферы, в т.ч. аутистического спектра (РАС)</span>
+                        <b-badge>{{summ.ras}}</b-badge>
+                      </b-list-group-item>
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">Соматическими заболеваниями</span>
+                        <b-badge>{{summ.somaticheski}}</b-badge>
+                      </b-list-group-item>
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">Иное</span>
+                        <b-badge>{{summ.inoje}}</b-badge>
+                      </b-list-group-item>
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">В классах начальной ступени (1-4 кл.)</span>
+                        <b-badge>{{summ.stupeni14}}</b-badge>
+                      </b-list-group-item>
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">В классах средней ступени (5-9 кл.)</span>
+                        <b-badge>{{summ.stupeni59}}</b-badge>
+                      </b-list-group-item>
+                      <b-list-group-item class="d-flex align-items-center">
+                        <span class="mr-auto">В классах старшей ступени (10-11 кл.)</span>
+                        <b-badge>{{summ.stupeni1011}}</b-badge>
+                      </b-list-group-item>
 
-            <b-button type="submit" variant="danger">Отправить</b-button>&nbsp;
+                    </b-list-group>
+                  </div>
+                </template></b-col>
+                <b-col cols="8">
+                  <div v-for="item in items" :key="item.id" >
+                  <!-- Using value -->
+                  <b-button v-b-toggle="item.id+'-id'" class="m-1">{{item.fio}}, {{item.doljnost}}, {{item.name}}, Адрес({{item.site}}, {{item.phone}}, {{item.email}})</b-button>
+                  <!-- Element to collapse -->
+                  <b-collapse :id="item.id+'-id'">
+                    <b-card>
+                      <b-list-group>
+
+                        <b-list-group-item variant="light">
+                          <b-row class="mt-3">
+                            <b-col>
+                              <label for="1">Наименование учреждения (полное и сокращенное)</label>
+                              <b-form-input id="1" disabled v-model="item.name" placeholder=""></b-form-input>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3" v-model="item.addres">Адрес учреждения</h4>
+                          <b-row>
+                            <b-col>
+                              <label for="2">Cайт</label>
+                              <b-form-input disabled id="2" v-model="item.site"></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="3">Телефон</label>
+                              <b-form-input disabled type="number" v-model="item.phone" id="3"></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="4">E-mail</label>
+                              <b-form-input disabled type="email" v-model="item.email"  id="4"></b-form-input>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3" >Тип</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select id="type" disabled v-model="item.type" :options="level"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">Лицензия:</h4>
+                          <b-row>
+                            <b-col>
+
+                              <label v-if="item.PDF1" for="5"><b-link target="_blank" :href="'http://localhost:1337'+item.PDF1.url" >на осуществление медицинской деятельности</b-link></label>
+
+                            </b-col>
+                            <b-col>
+                              <label v-if="item.PDF2" for="6"><b-link target="_blank" :href="'http://localhost:1337'+item.PDF2.url">на осуществление образовательной деятельности</b-link></label>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <b-row align-v="baseline" class="mt-3">
+                            <b-col>
+                              <label for="7">Год фактического начала предоставления учреждением образовательных услуг</label>
+                              <b-form-input disabled id="7" v-model="item.year"  type="text" placeholder=""></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="8">Общая численность детей с инвалидностью в текущем году</label>
+                              <b-form-input disabled id="8" v-model="item.kidcount"  type="number" placeholder=""></b-form-input>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">7.Укажите наличие в учреждении нормативно-правового обеспечения организации получения образования детьми- инвалидами:</h4>
+                          <b-row>
+                            <b-col>
+                              <label v-if="item.PDF3" for="9"><b-link target="_blank" :href="'http://localhost:1337'+item.PDF3.url">Разделы в Уставе учреждения об обучении и воспитании детей с инвалидностью</b-link></label>
+
+                            </b-col>
+                            <b-col>
+                              <label v-if="item.PDF4" for="10"><b-link target="_blank" :href="'http://localhost:1337'+item.PDF4.url">Локальные акты по работе с детьми- инвалидами (Положение об итоговой аттестации и др.)</b-link></label>
+
+                            </b-col>
+                          </b-row>
+                          <b-row align-v="baseline" class="mt-3">
+                            <b-col>
+                              <label v-if="item.PDF5" for="11"><b-link target="_blank" :href="'http://localhost:1337'+item.PDF5.url">Разделы о создании специальных образовательных условий для детей с инвалидностью в Программе развития организации</b-link></label>
+
+                            </b-col>
+                            <b-col>
+                              <label v-if="item.PDF6" for="12"><b-link target="_blank" :href="'http://localhost:1337'+item.PDF6.url">Другое</b-link></label>
+
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">8.Укажите категории детей с инвалидностью в учреждении, что обусловлено:</h4>
+                          <b-row>
+                            <b-col>
+                              <label for="12">Нарушением зрения</label>
+                              <b-form-input disabled type="number" v-model="item.zreniya"  id="12" placeholder=""></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="13">Нарушением слуха</label>
+                              <b-form-input disabled type="number" v-model="item.slukha" id="13" placeholder=""></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="14">Нарушением интеллекта</label>
+                              <b-form-input disabled type="number" v-model="item.intellekta" id="14" placeholder=""></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="15">Нарушением речи</label>
+                              <b-form-input disabled type="number" v-model="item.rechi" id="15" placeholder=""></b-form-input>
+                            </b-col>
+                          </b-row>
+                          <b-row class="mt-3" align-v="baseline">
+                            <b-col>
+                              <label for="16">Двигательными нарушениями (в том числе ДЦП)</label>
+                              <b-form-input disabled id="16" type="number" v-model="item.cerebral" placeholder=""></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="17">Расстройством эмоционально-волевой сферы, в т.ч. аутистического спектра (РАС)</label>
+                              <b-form-input disabled id="17" type="number" v-model="item.ras" placeholder=""></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="18">Соматическими заболеваниями</label>
+                              <b-form-input disabled id="18" type="number" v-model="item.somaticheski" placeholder=""></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="19">Иное</label>
+                              <b-form-input disabled id="19" v-model="item.inoje" placeholder=""></b-form-input>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">9.Укажите количество детей с инвалидностью для обучения в классах:</h4>
+                          <b-row>
+                            <b-col>
+                              <label for="20">В классах начальной ступени (1-4 кл.)</label>
+                              <b-form-input disabled type="number" v-model="item.stupeni14" id="20" placeholder=""></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="21">В классах средней ступени (5-9 кл.)</label>
+                              <b-form-input disabled type="number" id="21" v-model="item.stupeni59" placeholder=""></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="22">В классах старшей ступени (10-11 кл.)</label>
+                              <b-form-input disabled type="number" id="22" v-model="item.stupeni1011" placeholder=""></b-form-input>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">10.Какие формы получения образования имеются в учреждении?</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type" v-model="item.level1" :options="level1"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">11.Все ли дети могут получить образовательные услуги, адекватные их потребностям и возможностям?</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type" v-model="item.level2" :options="level2"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">12.1 Укажите, какие из следующих специалистов есть в Вашем учреждении (с указанием их числа)?</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type" v-model="item.level3" :options="level3"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">12.2 Оцените степень укомплектованности Вашего учреждения следующими специалистами:</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type23" v-model="item.level4" :options="level4"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">12.3 Как Вы сами оцениваете уровень профессиональной подготовки перечисленных специалистов в Вашем учреждении?</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type" v-model="item.level5" :options="level5"></b-form-select>
+                            </b-col>
+                          </b-row>
+
+                        </b-list-group-item>
+
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">13.1 Укажите наличие договоров (соглашений) Вашего учреждения о сотрудничестве с другими организациями/учреждениями в текущем календарном году:</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type2" v-model="item.level7" :options="level7"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">13.2 В договорах с какими из перечисленных выше учреждениями есть наибольшая потребность?</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type1" v-model="item.level6" :options="level6"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">14 Укажите количество педагогических работников в учреждении</h4>
+                          <b-row>
+                            <b-col>
+                              <label for="11">В штате организации</label>
+                              <b-form-input disabled id="11" type="number" v-model="item.vorganizatsii"></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="12">По договору с образовательными организациями</label>
+                              <b-form-input disabled id="12" type="number" v-model="item.dogovor"></b-form-input>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">15 Укажите количество медицинских работников в учреждении</h4>
+                          <b-row>
+                            <b-col>
+                              <label for="13">В штате организации</label>
+                              <b-form-input disabled type="number" v-model="item.medrab" id="13"></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <label for="14">По договору с учреждениями здравоохранения</label>
+                              <b-form-input disabled type="number" v-model="item.zdravohran" id="14"></b-form-input>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item class="mt-3" variant="light">
+                          <b-row>
+                            <b-col>
+                              <label for="15">Укажите количество сотрудников, прошедших повышение квалификации/ профессиональную переподготовку по проблемам обучения и воспитания детей с инвалидностью за последние 5 лет</label>
+                              <b-form-input disabled type="number" v-model="item.skillup" id="15"></b-form-input>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">17.Укажите наличие условий для осуществления образовательного процесса из следующего списка:</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type3" v-model="item.level8" :options="level8"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">17.2.Как Вы в целом оцениваете наличие условий для осуществления образовательного процесса в учреждении?</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type4" v-model="item.level9" :options="level9"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">17.3.Укажите, что с Вашей точки зрения, может поспособствовать улучшению условий для осуществления образовательного процесса в учреждении?</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type5" v-model="item.level6" :options="level6"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">18.1.Выберите из перечисленных архитектурных условий те, которые имеются в здании Вашего учреждения (укажите все, пожалуйста):</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type6" v-model="item.level77" :options="level77"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">18.2.Как Вы в целом оцениваете качество архитектурных условий в здании учреждения?</h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type7" v-model="item.level5" :options="level5"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">
+                            18.3.Укажите, что с Вашей точки зрения, может поспособствовать улучшению архитектурных условий в Вашем учреждении (возможно несколько вариантов ответа):
+                          </h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type8" v-model="item.level87" :options="level87"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">
+                            19.1.Выберите из перечисленного специального оборудования то, которые имеются в здании Вашего учреждения:
+                          </h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type9" v-model="item.level97" :options="level97"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">
+                            19.2.Как Вы в целом оцениваете укомплектованность специальным оборудованием Вашего учреждения?
+                          </h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type10" v-model="item.level5" :options="level5"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">
+                            19.3.Укажите, что с Вашей точки зрения, может поспособствовать улучшению ситуации со специальным оборудованием в учреждении:
+                          </h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type11" v-model="item.level193" :options="level107"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">
+                            20.1.Выберите из перечисленных типов специальных дидактических материалов те, которые имеются в здании Вашего учреждения:
+                          </h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type12" v-model="item.level201" :options="level117"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">
+                            20.2.Как Вы сами в целом оцениваете наличие специальных дидактических материалов  в  учреждении?
+                          </h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-select disabled id="type13" v-model="item.level202" :options="level5"></b-form-select>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">
+                            Данные лица, заполнившего анкету:
+                          </h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-input disabled class="sm" v-model="item.fio" placeholder="ФИО"></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <b-form-input disabled class="sm" v-model="item.doljnost" placeholder="Должность"></b-form-input>
+                            </b-col>
+                            <b-col>
+                              <b-form-input disabled class="sm" v-model="item.mailcontact" placeholder="Контактные телефоны (е-mail, телефон)"></b-form-input>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+                        <b-list-group-item variant="light">
+                          <h4 class="mt-3">
+                            Актуальные проблемы деятельности учреждения
+                          </h4>
+                          <b-row>
+                            <b-col>
+                              <b-form-textarea disabled
+                                  id="textarea"
+                                  v-model="item.description"
+                                  placeholder="Можете здесь написать..."
+                                  rows="3"
+                                  max-rows="6"
+                              ></b-form-textarea>
+                            </b-col>
+                          </b-row>
+                        </b-list-group-item>
+                      </b-list-group>
+                    </b-card>
+                  </b-collapse>
+                </div></b-col>
+              </b-row>
+            </b-container>
 
           </div>
 
@@ -457,12 +825,6 @@
 
 
 
-
-    </b-card>
-    <b-card v-else body-class="text-center">
-      <b-card-text>
-        <h1>Спасибо за участие!</h1>
-      </b-card-text>
     </b-card>
   </b-container>
 
@@ -472,70 +834,69 @@
 // @ is an alias to /src
 
 import axios from 'axios';
-
+const url = require('url');
 export default {
-  name: 'Home',
+  name: 'PrivatFilter',
   data() {
     return {
-
       perPage: 3,
       currentPage: 1,
-
+      items:null,
+      summ:{},
       isSend: true,
       form:{
-        name: 'Наименование учреждения (полное и сокращенное)',
-        site: 'http://localhost:8080/',
-        phone: '0931964305',
-        email:'delher@rambler.ru',
-        type:'Бюджетное',
+        name: '',
+        site: '',
+        phone: '',
+        email:'',
+        type:'',
         PDF1:null,
         PDF2:null,
         PDF3:null,
         PDF4:null,
         PDF5:null,
         PDF6:null,
-        year: '1991',
-        kidcount: 30,
-        zreniya:10,
-        slukha:10,
-        intellekta:10,
-        rechi:10,
+        year: '',
+        kidcount: null,
+        zreniya:null,
+        slukha:null,
+        intellekta:null,
+        rechi:null,
 
-        vorganizatsii: 30,
-        dogovor:10,
-        medrab:10,
-        zdravohran:10,
-        skillup:10,
+        vorganizatsii: null,
+        dogovor:null,
+        medrab:null,
+        zdravohran:null,
+        skillup:null,
+        cerebral:null,
+        ras:null,
+        somaticheski:null,
+        inoje:null,
+        stupeni14:null,
+        stupeni59:null,
+        stupeni1011:null,
 
-        cerebral:10,
-        ras:10,
-        somaticheski:10,
-        inoje:10,
-        stupeni14:10,
-        stupeni59:10,
-        stupeni1011:10,
+        fio:"",
+        doljnost:"",
+        mailcontact:"",
+        description:"",
+        level1: '',
+        level2: "",
+        level3: '',
+        level4: "",
+        level5: "",
+        level6: "",
+        level7: "",
+        level8: "",
+        level9: "",
+        level77: "",
+        level107: "",
+        level97: "",
+        level87: '',
+        level193: "",
+        level201: "",
+        level202: ""
 
-        fio:"Хомич Юрий Викторович",
-        doljnost:"Босс",
-        mailcontact:"cpukiller@mail.ru",
-        description:"Описание1",
-
-        level1: 'Экстернат',
-        level2: "Да",
-        level3: 'Педагог-психолог',
-        level4: "Ощущается нехватка специалистов",
-        level5: "Неудовлетворительно",
-        level6: "Увеличение бюджет",
-        level7: "С дошкольными образовательными организациями",
-        level8: "Кабинет психолога",
-        level9: "Неудовлетворительно",
-        level77: "Съезды с тротуаров на территории учреждения",
-        level107: "Восполнение недостающего оборудования.",
-        level97: "Наличие средств звуковой и визуальной сигнализации:",
-        level87: 'Восполнение недостающих типов архитектурных условий',
-        level193: "Обновление/ремонт имеющегося оборудования",
-        level201: "Учебно-методические комплекты по реализуемым программам",
-        level202: "Удовлетворительно"
       },
 
       level: [
@@ -548,6 +909,7 @@ export default {
           text: 'Бюджетное'
         }
       ],
+
       level1: [
         {
           value: 'Экстернат',
@@ -566,6 +928,7 @@ export default {
           text: 'Другое (укажите)'
         }
       ],
+      form1: '',
       level2: [
         {
           value: 'Да',
@@ -669,6 +1032,7 @@ export default {
           text: 'Другое (укажите)'
         }
       ],
+      form2: '',
       level5: [
         {
           value:"Неудовлетворительно",
@@ -1033,47 +1397,34 @@ export default {
 
     onSubmit(event){
       event.preventDefault();
-
+      //
       let formData = new FormData();
-      if(this.$refs.PDF1.files.length > 0){
-        //console.log(typeof this.$refs.PDF1.files, this.$refs.PDF1.files )
-        formData.append('files.PDF1', this.$refs.PDF1.files[0]);
 
-      }
-      if(this.$refs.PDF2.files.length > 0){
-        //console.log(typeof this.$refs.PDF2.files, this.$refs.PDF2.files )
-        formData.append('files.PDF2', this.$refs.PDF2.files[0]);
-
-      }
-
-      if(this.$refs.PDF3.files.length > 0){
-        //console.log(typeof this.$refs.PDF1.files, this.$refs.PDF1.files )
-        formData.append('files.PDF3', this.$refs.PDF3.files[0]);
-
-      }
-      if(this.$refs.PDF4.files.length > 0){
-        //console.log(typeof this.$refs.PDF2.files, this.$refs.PDF2.files )
-        formData.append('files.PDF4', this.$refs.PDF4.files[0]);
-
-      }
-      if(this.$refs.PDF5.files.length > 0){
-        //console.log(typeof this.$refs.PDF1.files, this.$refs.PDF1.files )
-        formData.append('files.PDF5', this.$refs.PDF5.files[0]);
-
-      }
-      if(this.$refs.PDF6.files.length > 0){
-        //console.log(typeof this.$refs.PDF2.files, this.$refs.PDF2.files )
-        formData.append('files.PDF6', this.$refs.PDF6.files[0]);
-
-      }
-      console.log(this.$refs);
       formData.append('data', JSON.stringify(this.form));
+
+
+      //const params = new url.URLSearchParams(this.form);
+      console.log(this.form);
       //formData.append('name', this.form.name);
       //this.$refs.file.files[0];
-
-      axios.post('http://localhost:1337/anketas', formData)
+      axios.get('http://localhost:1337/summ', this.form)
           .then((res) => {
-            this.isSend = false
+
+            this.summ = res.data.suma;
+            console.log(params);
+
+          })
+          .catch((error) => {
+            // error.response.status Check status code
+          }).finally(() => {
+        //Perform action in always
+      });
+
+      axios.get('http://localhost:1337/summ', this.form)
+          .then((res) => {
+
+            this.items = res.data.item;
+            //console.log(this.items);
             //alert("send")
             //Perform Success Action
           })
@@ -1084,15 +1435,6 @@ export default {
       });
       // alert(JSON.stringify(this.form))
       // alert("ssds")
-    },
-    send() {
-
-
-      if(!this.name) {
-        alert('пожалуйста заполните данные')
-        return
-      }
-      this.isSend = false
     }
   }
 }
