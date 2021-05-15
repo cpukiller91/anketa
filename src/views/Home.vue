@@ -12,25 +12,25 @@
               <b-row class="mt-3">
                 <b-col>
                   <label for="1">Наименование учреждения (полное и сокращенное)</label>
-                  <b-form-input id="1" v-model="form.name" placeholder=""></b-form-input>
+                  <b-form-input required id="1" v-model="form.name" placeholder=""></b-form-input>
                 </b-col>
               </b-row>
             </b-list-group-item>
 
             <b-list-group-item variant="light">
-              <h4 class="mt-3" v-model="form.addres">Адрес учреждения</h4>
+              <h4 class="mt-3" required v-model="form.addres">Адрес учреждения</h4>
               <b-row>
                 <b-col>
                   <label for="2">Cайт</label>
-                  <b-form-input id="2" v-model="form.site"></b-form-input>
+                  <b-form-input id="2" required v-model="form.site"></b-form-input>
                 </b-col>
                 <b-col>
                   <label for="3">Телефон</label>
-                  <b-form-input type="number" v-model="form.phone" id="3"></b-form-input>
+                  <b-form-input required type="number" v-model="form.phone" id="3"></b-form-input>
                 </b-col>
                 <b-col>
                   <label for="4">E-mail</label>
-                  <b-form-input type="email" v-model="form.email"  id="4"></b-form-input>
+                  <b-form-input required type="email" v-model="form.email"  id="4"></b-form-input>
                 </b-col>
               </b-row>
             </b-list-group-item>
@@ -81,11 +81,11 @@
               <b-row align-v="baseline" class="mt-3">
                 <b-col>
                   <label for="7">Год фактического начала предоставления учреждением образовательных услуг</label>
-                  <b-form-input id="7" v-model="form.year"  type="number" placeholder=""></b-form-input>
+                  <b-form-input required id="7" v-model="form.year"  type="number" placeholder=""></b-form-input>
                 </b-col>
                 <b-col>
                   <label for="8">Общая численность детей с инвалидностью в текущем году</label>
-                  <b-form-input id="8" v-model="form.kidcount"  type="number" placeholder=""></b-form-input>
+                  <b-form-input required id="8" v-model="form.kidcount"  type="number" placeholder=""></b-form-input>
                 </b-col>
               </b-row>
             </b-list-group-item>
@@ -153,19 +153,19 @@
               <b-row>
                 <b-col>
                   <label for="12">Нарушением зрения</label>
-                  <b-form-input type="number" v-model="form.zreniya"  id="12" placeholder=""></b-form-input>
+                  <b-form-input required type="number" v-model="form.zreniya"  id="12" placeholder=""></b-form-input>
                 </b-col>
                 <b-col>
                   <label for="13">Нарушением слуха</label>
-                  <b-form-input type="number" v-model="form.slukha" id="13" placeholder=""></b-form-input>
+                  <b-form-input required type="number" v-model="form.slukha" id="13" placeholder=""></b-form-input>
                 </b-col>
                 <b-col>
                   <label for="14">Нарушением интеллекта</label>
-                  <b-form-input type="number" v-model="form.intellekta" id="14" placeholder=""></b-form-input>
+                  <b-form-input required type="number" v-model="form.intellekta" id="14" placeholder=""></b-form-input>
                 </b-col>
                 <b-col>
                   <label for="15">Нарушением речи</label>
-                  <b-form-input type="number" v-model="form.rechi" id="15" placeholder=""></b-form-input>
+                  <b-form-input required type="number" v-model="form.rechi" id="15" placeholder=""></b-form-input>
                 </b-col>
               </b-row>
               <b-row class="mt-3" align-v="baseline">
@@ -210,7 +210,7 @@
               <h4 class="mt-3">10.Какие формы получения образования имеются в учреждении?</h4>
               <b-row>
                 <b-col>
-                  <b-form-select id="type" v-model="form.level1" :options="level1"></b-form-select>
+                  <b-form-select id="type"  v-model="form.level1" :options="level1"></b-form-select>
                 </b-col>
               </b-row>
             </b-list-group-item>
